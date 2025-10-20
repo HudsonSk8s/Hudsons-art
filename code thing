@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Art & Comics</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>My Art & Comic Gallery</h1>
+    <button id="theme-toggle">🌓 Toggle Theme</button>
+  </header>
+
+  <section class="featured">
+    <h2>Featured Artwork</h2>
+    <img id="featured-art" src="assets/gallery/art1.jpg" alt="Featured artwork">
+  </section>
+
+  <main>
+    <section>
+      <h2>Art Gallery</h2>
+      <div id="gallery-grid" class="grid"></div>
+      <div class="controls">
+        <input id="add-gallery-url" type="text" placeholder="Paste image URL">
+        <button id="add-gallery-btn">Add Image</button>
+        <button id="clear-gallery-btn">Clear URL Images</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Comic Pages</h2>
+      <div id="comics-grid" class="grid"></div>
+      <div class="controls">
+        <input id="add-comic-url" type="text" placeholder="Paste comic URL">
+        <button id="add-comic-btn">Add Page</button>
+        <button id="clear-comic-btn">Clear URL Pages</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> My Art Website</p>
+  </footer>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <span id="lb-close" class="close">&times;</span>
+    <img id="lb-img" src="">
+    <a id="lb-download" href="#" download>Download</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
