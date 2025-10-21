@@ -379,6 +379,24 @@
 
     // Helpful note (console)
     console.log("Hudson's Art site loaded. To show your own images upload them to assets/gallery/ on GitHub, or add image URLs using the gallery input.");
-  </script>
+ </script>
+<audio id="bg-music" src="assets/music/merry-christmas-merry-christmas-music-271547.mp3" loop></audio>
+<button id="music-toggle">🔊 Toggle Music</button>
+<script>
+  const music = document.getElementById('bg-music');
+  const toggle = document.getElementById('music-toggle');
+  let playing = false;
+
+  toggle.addEventListener('click', () => {
+    if (!playing) {
+      music.play();
+      toggle.textContent = '🔇 Stop Music';
+    } else {
+      music.pause();
+      toggle.textContent = '🔊 Play Music';
+    }
+    playing = !playing;
+  });
+</script>
 </body>
 </html>
