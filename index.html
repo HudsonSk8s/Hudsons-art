@@ -1,56 +1,384 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>My Art & Comics</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hudson's Christmas Art Gallery 🎅</title>
+  <meta name="description" content="Hudson's Christmas drawings & holiday art — browse the seasonal gallery!" />
+  <style>
+    :root{
+      --bg:#fffdf6;
+      --panel:#fff;
+      --text:#1a1a1a;
+      --muted:#556;
+      --red:#c62828;
+      --green:#1b7a4b;
+      --gold:#d4af37;
+      --glass: rgba(0,0,0,0.06);
+      --radius:12px;
+      --max-width:1100px;
+      --gap:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background: linear-gradient(180deg,#fff 0%, #f2f7f6 60%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      min-height:100vh;
+      padding-bottom:60px;
+    }
+    .container{max-width:var(--max-width);margin:0 auto;padding:20px}
+
+    /* header */
+    header.site-header{
+      position:sticky;top:0;z-index:60;
+      backdrop-filter:saturate(120%) blur(6px);
+      background:rgba(255,255,255,0.92);
+      border-bottom:1px solid var(--glass)
+    }
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px}
+    .logo{font-weight:900;font-size:1.25rem;color:var(--red);display:flex;align-items:center;gap:10px;text-decoration:none}
+    nav.nav{display:flex;gap:12px;align-items:center}
+    nav.nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px}
+    nav.nav a:hover{background:rgba(0,0,0,0.03);color:var(--text)}
+
+    /* hero */
+    .hero{display:flex;gap:20px;align-items:center;padding:28px;border-radius:14px;margin-top:14px;background:
+      radial-gradient(circle at 10% 10%, rgba(255,245,240,0.6), transparent 8%),
+      linear-gradient(180deg, rgba(255,255,255,0.6), transparent 10%);}
+    .hero-left{flex:1}
+    .hero h1{margin:0;font-size:2rem}
+    .lead{color:var(--muted);margin-top:8px}
+    .hero-right{width:320px}
+    .banner{width:100%;border-radius:12px;height:220px;object-fit:cover;background:#ffecec;display:flex;align-items:center;justify-content:center;font-size:1.05rem;color:var(--muted);box-shadow:0 10px 30px rgba(0,0,0,0.06)}
+
+    /* layout sections */
+    section{padding:20px 0}
+    h2{margin:0 0 8px 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:var(--gap)}
+    .card{background:var(--panel);border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(20,20,20,0.05);padding:10px;position:relative}
+    .card img{width:100%;height:200px;object-fit:cover;border-radius:8px;display:block}
+    .card .meta{margin-top:8px;display:flex;justify-content:space-between;align-items:center}
+    .price{font-weight:700;color:var(--green)}
+    .fake-buy{background:var(--red);color:#fff;padding:8px 10px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-block}
+    .fake-buy.ghost{background:transparent;color:var(--red);border:1px solid var(--red);font-weight:700}
+
+    /* about & contact */
+    .about{background:linear-gradient(90deg,#fff,#fff);border-radius:12px;padding:16px;border:1px solid var(--glass)}
+    footer.site-footer{padding:18px 20px;border-top:1px solid var(--glass);text-align:center;color:var(--muted);position:fixed;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.95));}
+
+    /* decorations */
+    .decor { position:fixed;inset:0;pointer-events:none;z-index:10;
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(255,240,240,0.6), transparent 4%),
+        radial-gradient(circle at 90% 30%, rgba(230,255,240,0.6), transparent 4%);
+    }
+    .dec-emoji{position:fixed;font-size:28px;opacity:0.95}
+    .dec-1{left:6%;top:6%}
+    .dec-2{left:86%;top:8%}
+    .dec-3{left:10%;bottom:10%}
+    .dec-4{right:6%;bottom:8%}
+
+    /* lights */
+    .lights{position:fixed;left:0;right:0;top:0;height:60px;pointer-events:none;z-index:9}
+    .lights .bulb{position:absolute;top:18px;font-size:18px;transform:translateX(-50%);opacity:0.95;filter:drop-shadow(0 2px 2px rgba(0,0,0,0.15));}
+    .lights .b1{left:8%} .lights .b2{left:18%} .lights .b3{left:28%} .lights .b4{left:38%} .lights .b5{left:48%} .lights .b6{left:58%} .lights .b7{left:68%} .lights .b8{left:78%} .lights .b9{left:88%}
+    .lights .bulb{animation:blink 2s infinite}
+    @keyframes blink { 0%{opacity:1}50%{opacity:0.25}100%{opacity:1} }
+
+    /* snow */
+    .snow {pointer-events:none;position:fixed;inset:0;z-index:8}
+    .snow i{position:absolute;top:-10%;font-size:14px;color:#fff;opacity:0.95;animation:fall linear infinite}
+    @keyframes fall { to { transform: translateY(120vh) rotate(200deg); } }
+
+    /* lightbox */
+    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:30px;background:rgba(0,0,0,0.6);z-index:999}
+    .lightbox.show{display:flex}
+    .lb-close{position:absolute;right:22px;top:18px;font-size:36px;background:transparent;border:none;color:#fff;cursor:pointer}
+    .lightbox img{max-width:86vw;max-height:80vh;border-radius:10px}
+
+    /* audio control */
+    .audio-toggle{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--glass);padding:6px 10px;border-radius:10px;background:rgba(255,255,255,0.9);cursor:pointer}
+
+    /* responsive */
+    @media (max-width:880px){
+      .hero{flex-direction:column;padding:16px}
+      .hero-right{width:100%}
+      .card img{height:140px}
+      .logo{font-size:1.05rem}
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>My Art & Comic Gallery</h1>
-    <button id="theme-toggle">🌓 Toggle Theme</button>
+  <div class="decor" aria-hidden="true">
+    <div class="dec-emoji dec-1">🎅</div>
+    <div class="dec-emoji dec-2">🧝‍♀️</div>
+    <div class="dec-emoji dec-3">🎁</div>
+    <div class="dec-emoji dec-4">❄️</div>
+  </div>
+
+  <div class="lights" aria-hidden="true">
+    <div class="bulb b1">🔴</div>
+    <div class="bulb b2">🟢</div>
+    <div class="bulb b3">🟡</div>
+    <div class="bulb b4">🔴</div>
+    <div class="bulb b5">🟢</div>
+    <div class="bulb b6">🟡</div>
+    <div class="bulb b7">🔴</div>
+    <div class="bulb b8">🟢</div>
+    <div class="bulb b9">🟡</div>
+  </div>
+
+  <div class="snow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="logo" href="#">🎄 Hudson's Art</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#gallery">My Art</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div id="audioControl" class="audio-toggle" role="button" aria-pressed="false" title="Play / pause jingle">🔔 <span id="audioLabel">Play jingle</span></div>
+      </div>
+    </div>
   </header>
 
-  <section class="featured">
-    <h2>Featured Artwork</h2>
-    <img id="featured-art" src="assets/gallery/art1.jpg" alt="Featured artwork">
-  </section>
-
   <main>
-    <section>
-      <h2>Art Gallery</h2>
-      <div id="gallery-grid" class="grid"></div>
-      <div class="controls">
-        <input id="add-gallery-url" type="text" placeholder="Paste image URL">
-       <img src="assets/gallery/CamScanner 10-20-25 14.38_2.jpeg" alt="My Drawing" style="max-width:300px; margin:10px;">
-
-        <button id="add-gallery-btn">Add Image</button>
-        <button id="clear-gallery-btn">Clear URL Images</button>
+    <section id="home" class="hero container" aria-labelledby="homeHeading">
+      <div class="hero-left">
+        <h1 id="homeHeading">Hudson's Christmas Art Gallery 🎅</h1>
+        <p class="lead">Welcome to my holiday art shop! Browse my drawings below — new holiday pieces added regularly.</p>
+        <div style="margin-top:14px">
+          <a href="#gallery" class="fake-buy" style="background:var(--green)">Browse gallery</a>
+          <a href="#shop" class="fake-buy ghost" style="margin-left:8px">Shop (coming soon)</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="banner" id="featured-art">Featured: Holiday sketch 🎁</div>
       </div>
     </section>
 
-    <section>
-      <h2>Comic Pages</h2>
-      <div id="comics-grid" class="grid"></div>
-      <div class="controls">
-        <input id="add-comic-url" type="text" placeholder="Paste comic URL">
-        <button id="add-comic-btn">Add Page</button>
-        <button id="clear-comic-btn">Clear URL Pages</button>
+    <!-- Gallery -->
+    <section id="gallery" class="container" aria-labelledby="galleryHeading">
+      <h2 id="galleryHeading">My Art</h2>
+      <p class="lead">Click any image to enlarge. Upload images to <code>assets/gallery/</code> (or add image URLs with the control below).</p>
+
+      <div style="margin:12px 0;display:flex;gap:8px">
+        <input id="add-gallery-url" placeholder="Add image URL to gallery" style="flex:1;padding:8px;border-radius:8px;border:1px solid var(--glass)" />
+        <button id="add-gallery-btn" style="padding:9px 12px;border-radius:8px">Add</button>
+        <button id="clear-gallery-btn" style="padding:9px 12px;border-radius:8px">Clear</button>
       </div>
+
+      <div id="gallery-grid" class="grid" aria-live="polite"></div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="container">
+      <h2>About</h2>
+      <div class="about">
+        <p><strong>Hi! I’m Hudson.</strong> I’m a young artist who loves drawing and sharing my creations. My art is inspired by the holidays and imagination — I made the pieces on this site especially for Christmas. Thanks for stopping by!</p>
+      </div>
+    </section>
+
+    <!-- Contact / fake shop note -->
+    <section id="contact" class="container">
+      <h2>Contact</h2>
+      <p>If you'd like to ask about a piece, use the "Buy" (coming soon) buttons in the gallery — they currently show a message because direct payments aren't set up yet. You can also send a message to the site owner via your email client when you click the fake buttons.</p>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; <span id="year"></span> My Art Website</p>
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <small>© <span id="year"></span> Hudson's Art — Holiday Collection</small>
+    </div>
   </footer>
 
+  <!-- Lightbox -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
-    <span id="lb-close" class="close">&times;</span>
-    <img id="lb-img" src="">
-    <a id="lb-download" href="#" download>Download</a>
+    <button id="lb-close" class="lb-close" aria-label="Close">×</button>
+    <img id="lb-img" alt="Enlarged art">
   </div>
 
-  <script src="script.js"></script>
+  <!-- Jingle audio (optional: add assets/music/jingle.mp3 to enable) -->
+  <audio id="jingle" loop>
+    <source src="assets/music/jingle.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // CONFIG: default filenames to show (if you upload them into assets/gallery/)
+    const defaultGalleryFiles = [
+      'assets/gallery/art1.jpg',
+      'assets/gallery/art2.jpg'
+    ];
+    const GALLERY_KEY = 'hudsons_gallery_urls_v1';
+
+    // helpers
+    const el = id => document.getElementById(id);
+    const yearSpan = el('year');
+    yearSpan.textContent = new Date().getFullYear();
+
+    // elements
+    const galleryGrid = el('gallery-grid');
+    const addGalleryInput = el('add-gallery-url');
+    const addGalleryBtn = el('add-gallery-btn');
+    const clearGalleryBtn = el('clear-gallery-btn');
+    const lb = el('lightbox');
+    const lbImg = el('lb-img');
+    const lbClose = el('lb-close');
+
+    // stored URLs helper
+    function getStored(key){ try{ return JSON.parse(localStorage.getItem(key) || '[]') }catch(e){ return [] } }
+    function setStored(key,arr){ localStorage.setItem(key, JSON.stringify(arr)) }
+
+    // render grid
+    function renderGrid(container, srcArray){
+      container.innerHTML = '';
+      srcArray.forEach((src,i)=>{
+        const card = document.createElement('div');
+        card.className = 'card';
+        const a = document.createElement('a');
+        a.href = '#';
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Artwork ${i+1}`;
+        img.loading = 'lazy';
+        a.appendChild(img);
+        a.addEventListener('click', e=>{
+          e.preventDefault();
+          openLightbox(src);
+        });
+
+        // hat decoration
+        const hat = document.createElement('div');
+        hat.style.position='absolute';
+        hat.style.right='10px';
+        hat.style.top='10px';
+        hat.style.fontSize='20px';
+        hat.textContent='🎅';
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        const title = document.createElement('div');
+        title.textContent = `Artwork ${i+1}`;
+        title.style.fontSize='0.95rem';
+        title.style.color='var(--muted)';
+        const price = document.createElement('div');
+        price.innerHTML = `<span class="price">$25</span>`;
+        meta.appendChild(title);
+        meta.appendChild(price);
+
+        // Fake buy button: shows a friendly alert (no email/payment)
+        const buy = document.createElement('a');
+        buy.className = 'fake-buy';
+        buy.href = '#';
+        buy.textContent = 'Buy Now (Coming Soon!)';
+        buy.style.marginTop = '8px';
+        buy.addEventListener('click',(ev)=>{
+          ev.preventDefault();
+          alert("Thanks for your interest! Buying isn't set up yet — come back soon!");
+        });
+
+        card.appendChild(a);
+        card.appendChild(hat);
+        card.appendChild(meta);
+        card.appendChild(buy);
+        container.appendChild(card);
+      });
+    }
+
+    function openLightbox(src){ lbImg.src = src; lb.classList.add('show'); lb.setAttribute('aria-hidden','false'); }
+    function closeLightbox(){ lb.classList.remove('show'); lb.setAttribute('aria-hidden','true'); }
+    lbClose.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', (e)=>{ if(e.target===lb) closeLightbox(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeLightbox(); });
+
+    // Build gallery from defaults + stored URL additions
+    function buildGallery(){
+      const base = defaultGalleryFiles.slice();
+      const stored = getStored(GALLERY_KEY);
+      const all = base.concat(stored);
+      renderGrid(galleryGrid, all);
+      // replace featured if first exists
+      const first = all[0] || '';
+      const feat = el('featured-art');
+      feat.innerHTML = '';
+      if(first){
+        const im = document.createElement('img');
+        im.src = first;
+        im.alt = 'Featured';
+        im.style.width='100%';
+        im.style.height='100%';
+        im.style.objectFit='cover';
+        im.style.borderRadius='10px';
+        feat.appendChild(im);
+      } else {
+        feat.textContent = 'Featured: Holiday sketch 🎁';
+      }
+    }
+    buildGallery();
+
+    // add via URL controls
+    addGalleryBtn.addEventListener('click', ()=>{
+      const url = addGalleryInput.value.trim();
+      if(!url) return alert('Enter an image URL.');
+      const arr = getStored(GALLERY_KEY);
+      arr.unshift(url);
+      setStored(GALLERY_KEY, arr);
+      addGalleryInput.value = '';
+      buildGallery();
+    });
+    clearGalleryBtn.addEventListener('click', ()=>{
+      if(confirm('Clear added images?')){ localStorage.removeItem(GALLERY_KEY); buildGallery(); }
+    });
+
+    // Audio control
+    const audio = el('jingle');
+    const audioControl = el('audioControl');
+    const audioLabel = el('audioLabel');
+    audioControl.addEventListener('click', ()=>{
+      if(!audio.src || audio.src.indexOf('jingle.mp3')===-1){
+        alert('No jingle file found. To enable sound, add assets/music/jingle.mp3 to your repo.');
+        return;
+      }
+      if(audio.paused){ audio.play(); audioControl.setAttribute('aria-pressed','true'); audioLabel.textContent='Pause jingle'; }
+      else { audio.pause(); audioControl.setAttribute('aria-pressed','false'); audioLabel.textContent='Play jingle'; }
+    });
+    audio.addEventListener('ended', ()=>{ audioControl.setAttribute('aria-pressed','false'); audioLabel.textContent='Play jingle'; });
+
+    // Snow generation
+    (function makeSnow(){
+      const snow = document.querySelector('.snow');
+      const count = 20;
+      for(let i=0;i<count;i++){
+        const s = document.createElement('i');
+        s.textContent = '❄️';
+        const left = Math.random()*100;
+        const delay = Math.random()*-20;
+        const dur = 8 + Math.random()*18;
+        s.style.left = left + 'vw';
+        s.style.animationDuration = dur + 's';
+        s.style.animationDelay = delay + 's';
+        s.style.opacity = (0.6 + Math.random()*0.4);
+        snow.appendChild(s);
+      }
+    })();
+
+    // floating emojis animation
+    (function floatEmojis(){
+      const ups = document.querySelectorAll('.dec-emoji');
+      ups.forEach((d, i)=>{
+        d.animate([{transform:'translateY(0px)'},{transform:'translateY(-8px)'},{transform:'translateY(0px)'}],{duration:3000 + i*200,iterations:Infinity,delay:i*200});
+      });
+    })();
+
+    // Helpful note (console)
+    console.log("Hudson's Art site loaded. To show your own images upload them to assets/gallery/ on GitHub, or add image URLs using the gallery input.");
+  </script>
 </body>
 </html>
