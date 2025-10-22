@@ -283,23 +283,15 @@
           ev.preventDefault();
           alert("Thanks for your interest! Buying isn't set up yet — come back soon!");
         });
-<section id="reviews">
-  <h2>Leave a Review 💬</h2>
-  <iframe 
-    src="YOUR-GOOGLE-FORM-LINK" 
-    width="100%" 
-    height="500"
-    style="border:none;">
-  </iframe>
-</section>
+
         card.appendChild(a);
         card.appendChild(hat);
         card.appendChild(meta);
         card.appendChild(buy);
         container.appendChild(card);
       });
-    }
-
+      
+    
     function openLightbox(src){ lbImg.src = src; lb.classList.add('show'); lb.setAttribute('aria-hidden','false'); }
     function closeLightbox(){ lb.classList.remove('show'); lb.setAttribute('aria-hidden','true'); }
     lbClose.addEventListener('click', closeLightbox);
