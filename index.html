@@ -150,17 +150,6 @@
   </header>
 
   <main>
-    <section>
-  <h2>Art Gallery</h2>
-  <div id="gallery-grid" class="grid">
-    <img src="assets/gallery/art1.jpg" alt="Drawing 1">
-    <img src="assets/gallery/art2.jpg" alt="Drawing 2">
-    <img src="assets/gallery/art3.jpg" alt="Drawing 3">
-    <img src="assets/gallery/art4.jpg" alt="Drawing 4">
-    <img src="assets/gallery/art5.jpg" alt="Drawing 5">
-  </div>
-</section>
-
     <section id="home" class="hero container" aria-labelledby="homeHeading">
       <div class="hero-left">
         <h1 id="homeHeading">Hudson's Christmas Art Gallery 🎅</h1>
@@ -280,7 +269,7 @@
         title.style.fontSize='0.95rem';
         title.style.color='var(--muted)';
         const price = document.createElement('div');
-        price.innerHTML = `<span class="price">$2</span>`;
+        price.innerHTML = `<span class="price">$25</span>`;
         meta.appendChild(title);
         meta.appendChild(price);
 
@@ -301,7 +290,8 @@
         card.appendChild(buy);
         container.appendChild(card);
       });
-    
+    }
+
     function openLightbox(src){ lbImg.src = src; lb.classList.add('show'); lb.setAttribute('aria-hidden','false'); }
     function closeLightbox(){ lb.classList.remove('show'); lb.setAttribute('aria-hidden','true'); }
     lbClose.addEventListener('click', closeLightbox);
@@ -389,24 +379,7 @@
 
     // Helpful note (console)
     console.log("Hudson's Art site loaded. To show your own images upload them to assets/gallery/ on GitHub, or add image URLs using the gallery input.");
- </script>
-<audio id="bg-music" src="assets/music/merry-christmas-merry-christmas-music-271547.mp3" loop></audio>
-<button id="music-toggle">🔊 Toggle Music</button>
-<script>
-  const music = document.getElementById('bg-music');
-  const toggle = document.getElementById('music-toggle');
-  let playing = false;
-
-  toggle.addEventListener('click', () => {
-    if (!playing) {
-      music.play();
-      toggle.textContent = '🔇 Stop Music';
-    } else {
-      music.pause();
-      toggle.textContent = '🔊 Play Music';
-    }
-    playing = !playing;
-  });
-</script>
+  </script>
 </body>
 </html>
+
