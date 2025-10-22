@@ -192,7 +192,8 @@
       <p>If you'd like to ask about a piece, use the "Buy" (coming soon) buttons in the gallery — they currently show a message because direct payments aren't set up yet. You can also send a message to the site owner via your email client when you click the fake buttons.</p>
     </section>
   </main>
-
+<!-- 🎁 Easter Egg Gift -->
+<div id="gift-box" style="position:fixed;right:20px;bottom:80px;font-size:40px;cursor:pointer;z-index:100;">🎁</div>
   <footer class="site-footer" role="contentinfo">
     <div class="container">
       <small>© <span id="year"></span> Hudson's Art — Holiday Collection</small>
@@ -379,6 +380,61 @@
 
     // Helpful note (console)
     console.log("Hudson's Art site loaded. To show your own images upload them to assets/gallery/ on GitHub, or add image URLs using the gallery input.");
+  // 🎅 Secret Santa Mode + Gift Surprise Easter Eggs
+
+let santaClicks = 0;
+
+// When user clicks a Santa hat (🎅) 3 times
+document.addEventListener('click', (e) => {
+  if (e.target.textContent === '🎅') {
+    santaClicks++;
+    if (santaClicks === 3) {
+      santaClicks = 0;
+      alert("🎅 Ho Ho Ho! You found Secret Santa Mode!");
+      // add extra snow!
+      for (let i = 0; i < 15; i++) {
+        const s = document.createElement('i');
+        s.textContent = '❄️';
+        const left = Math.random() * 100;
+        const dur = 8 + Math.random() * 18;
+        s.style.left = left + 'vw';
+        s.style.animationDuration = dur + 's';
+        s.style.opacity = 0.8;
+        document.querySelector('.snow').appendChild(s);
+      }
+    }
+  }
+});
+
+// 🎁 Gift box click = confetti and message
+const giftBox = document.getElementById('gift-box');
+giftBox.addEventListener('click', () => {
+  // confetti effect
+  for (let i = 0; i < 40; i++) {
+    const conf = document.createElement('div');
+    conf.textContent = ['🎉','🎄','✨','🎁'][Math.floor(Math.random()*4)];
+    conf.style.position = 'fixed';
+    conf.style.left = (Math.random()*100) + 'vw';
+    conf.style.top = '100vh';
+    conf.style.fontSize = '24px';
+    conf.style.animation = `rise${i} 2s ease-out forwards`;
+    document.body.appendChild(conf);
+
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes rise${i} {
+        from { transform: translateY(0); opacity:1; }
+        to { transform: translateY(-110vh); opacity:0; }
+      }
+    `;
+    document.head.appendChild(style);
+
+    setTimeout(() => conf.remove(), 2000);
+  }
+
+  alert("🎁 Merry Christmas from Hudson’s Art! Thanks for finding the surprise!");
+});
+
   </script>
 </body>
 </html>
