@@ -638,23 +638,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// 🌌 Snow Mode (M)
-document.addEventListener('keydown', e => {
-  if (e.key.toLowerCase() === 'm') {
-    const bg = document.createElement('div');
-    bg.style.position = 'fixed';
-    bg.style.top = '0';
-    bg.style.left = '0';
-    bg.style.width = '100vw';
-    bg.style.height = '100vh';
-    bg.style.background = 'linear-gradient(#001, #004)';
-    bg.style.zIndex = '1';
-    bg.style.pointerEvents = 'none';
-    document.body.appendChild(bg);
-    setTimeout(() => bg.remove(), 60000);
-  }
-});
-
 // 🎁 Hidden Click Easter Eggs
 // Hidden snowflake
 const hiddenFlake = document.createElement('div');
