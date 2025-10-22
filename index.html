@@ -113,6 +113,25 @@
   </style>
 </head>
 <body>
+<!-- 🎅 Santa Hat Easter Egg -->
+<script>
+  document.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 's') { // press "S" for Santa
+      const hat = document.createElement('div');
+      hat.textContent = '🎅';
+      hat.style.position = 'fixed';
+      hat.style.bottom = '20px';
+      hat.style.right = '20px';
+      hat.style.fontSize = '80px';
+      hat.style.zIndex = '9999';
+      hat.style.transition = 'transform 1s ease';
+      document.body.appendChild(hat);
+      setTimeout(() => hat.style.transform = 'translateY(-100vh)'), 1000;
+      setTimeout(() => hat.remove(), 2000);
+    }
+  });
+</script>
+  
   <div class="decor" aria-hidden="true">
     <div class="dec-emoji dec-1">🎅</div>
     <div class="dec-emoji dec-2">🧝‍♀️</div>
