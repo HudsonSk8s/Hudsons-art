@@ -227,42 +227,15 @@ footer.site-footer{
 <section id="home" class="hero container">
   <div class="hero-left">
     <h1>Hudson’s Art Gallery</h1>
-    <p class="lead">Buy my full art collection in one simple purchase.</p>
+    <p class="lead">Welcome to my collection of original drawings and artwork. New pieces added regularly!</p>
   </div>
   <div class="hero-right">
-    <div class="banner">All artwork • $5</div>
+    <div class="banner">Featured artwork</div>
   </div>
 </section>
 
 <section id="gallery" class="container">
-  <h2>Full Art Collection</h2>
-
-  <!-- BUY ALL BUTTON -->
-  <div style="text-align:center;margin:20px 0;">
-    <h3>Get every artwork</h3>
-    <p style="color:var(--muted)">One purchase • Instant download</p>
-
-    <form action="https://www.paypal.com/ncp/payment/KUW32DNM7Q3Y2"
-          method="post" target="_blank">
-      <input type="submit" value="Buy All Artwork – $5"
-        style="padding:14px 28px;
-               font-size:1.1rem;
-               border:none;
-               border-radius:8px;
-               background:#FFD140;
-               font-weight:bold;
-               cursor:pointer;">
-    </form>
-
-    <a href="downloads/Hudsons_Art_Collection.zip" target="_blank"
-       style="display:block;margin-top:8px;
-              color:var(--accent-2);
-              font-weight:bold;
-              text-decoration:none;">
-      Download full collection after payment
-    </a>
-  </div>
-
+  <h2>My Art</h2>
   <div id="gallery-grid" class="grid"></div>
 </section>
 
@@ -270,18 +243,17 @@ footer.site-footer{
   <h2>About</h2>
   <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
     <img src="assets/gallery/IMG_6869.jpeg" alt="Hudson"
-         style="width:150px;height:150px;border-radius:50%;object-fit:cover;
-                box-shadow:0 8px 18px rgba(0,0,0,0.12);">
+         style="width:150px;height:150px;border-radius:50%;object-fit:cover;box-shadow:0 8px 18px rgba(0,0,0,0.12);">
     <p style="max-width:500px;">
       <strong>Hi! I’m Hudson.</strong> I’m a young artist who loves drawing and sharing my work.
-      Thanks for supporting my art!
+      This site is where I showcase and sell my favorite pieces.
     </p>
   </div>
 </section>
 
 <section id="contact" class="container">
   <h2>Contact</h2>
-  <p>Questions? Reach out anytime.</p>
+  <p>To purchase an artwork, click a PayPal “Buy Now” button. After payment, use the download link provided.</p>
 </section>
 
 </main>
@@ -298,10 +270,34 @@ footer.site-footer{
 
 <script>
 const artworks = [
-  { src:'assets/gallery/Ron Weasley_1.jpeg', title:'Ron Weasley' },
-  { src:'assets/gallery/Skateboarder_1.jpeg', title:'Skateboarder' },
-  { src:'assets/gallery/CamScanner 10-20-25 14.38_2.jpeg', title:'Koala' },
-  { src:'assets/gallery/CamScanner 1-12-26 13.02_1.jpeg', title:'Harry Potter' }
+  {
+    src: 'assets/gallery/Ron Weasley_1.jpeg',
+    title: 'Ron Weasley',
+    price: 2,
+    download: 'downloads/Ron_Weasley_1.pdf',
+    paypalButtonId: 'PAYPAL_ID_1'
+  },
+  {
+    src: 'assets/gallery/Skateboarder_1.jpeg',
+    title: 'Skateboarder',
+    price: 2,
+    download: 'downloads/Skateboarder_1.pdf',
+    paypalButtonId: 'PAYPAL_ID_2'
+  },
+  {
+    src: 'assets/gallery/CamScanner 10-20-25 14.38_2.jpeg',
+    title: 'Koala',
+    price: 2,
+    download: 'downloads/CamScanner_10-20-25_14.38_2.pdf',
+    paypalButtonId: 'PAYPAL_ID_3'
+  },
+  {
+    src: 'assets/gallery/CamScanner 1-12-26 13.02_1.jpeg',
+    title: 'Harry Potter',
+    price: 2,
+    download: 'downloads/CamScanner_1-12-26_13.02_1.pdf',
+    paypalButtonId: 'PAYPAL_ID_4'
+  }
 ];
 
 const grid = document.getElementById('gallery-grid');
@@ -320,18 +316,30 @@ artworks.forEach(art=>{
   img.alt=art.title;
   img.onclick=()=>{
     lbImg.src=art.src;
-    lbTitle.textContent=art.title;
+    lbTitle.textContent=art.title; // display title in lightbox
     lb.classList.add('show');
   };
 
-  card.appendChild(img);
-  card.innerHTML+=`
+  card.innerHTML=`
     <div class="meta">
       <span>${art.title}</span>
-      <span class="price">$5</span>
+      <span class="price">$${art.price}</span>
     </div>
+    <form action="https://www.paypal.com/ncp/payment/${art.paypalButtonId}"
+          method="post" target="_blank"
+          style="margin-top:8px;text-align:center;">
+      <input type="submit" value="Buy Now"
+        style="padding:8px 16px;border:none;border-radius:6px;
+        background:#FFD140;font-weight:bold;cursor:pointer;">
+    </form>
+    <a href="${art.download}" target="_blank"
+       style="display:block;margin-top:6px;text-align:center;
+       color:var(--accent-2);font-weight:bold;text-decoration:none;">
+       Download after payment
+    </a>
   `;
 
+  card.prepend(img);
   grid.appendChild(card);
 });
 
