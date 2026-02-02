@@ -242,16 +242,17 @@ footer.site-footer{
     <h3>Get every artwork</h3>
     <p style="color:var(--muted)">One purchase • Instant download</p>
 
-    <form action="https://www.paypal.com/ncp/payment/KUW32DNM7Q3Y2"
-          method="post" target="_blank">
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+      <input type="hidden" name="cmd" value="_s-xclick">
+      <input type="hidden" name="hosted_button_id" value="KUW32DNM7Q3Y2">
       <input type="submit" value="Buy All Artwork – $5"
-        style="padding:14px 28px;
-               font-size:1.1rem;
-               border:none;
-               border-radius:8px;
-               background:#FFD140;
-               font-weight:bold;
-               cursor:pointer;">
+             style="padding:14px 28px;
+                    font-size:1.1rem;
+                    border:none;
+                    border-radius:8px;
+                    background:#FFD140;
+                    font-weight:bold;
+                    cursor:pointer;">
     </form>
 
     <a href="downloads/Hudsons_Art_Collection.zip" target="_blank"
@@ -311,6 +312,7 @@ const lbTitle = document.getElementById('lb-title');
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+/* Render artwork grid */
 artworks.forEach(art=>{
   const card=document.createElement('div');
   card.className='card';
@@ -335,6 +337,7 @@ artworks.forEach(art=>{
   grid.appendChild(card);
 });
 
+/* Lightbox */
 document.getElementById('lb-close').onclick=()=>lb.classList.remove('show');
 lb.onclick=e=>{if(e.target===lb)lb.classList.remove('show')};
 </script>
