@@ -3,344 +3,272 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-<title>Hudson's Art Gallery</title>
-<meta name="description" content="Hudson's original drawings & artwork — browse the gallery!" />
-
+<title>Hudson's Christmas Art Gallery 🎅</title>
+<meta name="description" content="Hudson's Christmas drawings & holiday art — browse the seasonal gallery!" />
 <style>
 :root{
-  --bg:#f7f9fc;
-  --panel:#ffffff;
+  --bg:#fffdf6;
+  --panel:#fff;
   --text:#1a1a1a;
-  --muted:#5a6472;
-  --accent:#4f7cff;
-  --accent-2:#2bb673;
+  --muted:#556;
+  --red:#c62828;
+  --green:#1b7a4b;
+  --gold:#d4af37;
   --glass: rgba(0,0,0,0.06);
   --radius:12px;
   --max-width:1100px;
   --gap:16px;
 }
-
 *{box-sizing:border-box}
-
 body{
   margin:0;
-  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   color:var(--text);
-  background:linear-gradient(180deg,#ffffff 0%, var(--bg) 70%);
+  background: linear-gradient(180deg,#fff 0%, #f2f7f6 60%);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
   min-height:100vh;
   padding-bottom:60px;
 }
-
 .container{max-width:var(--max-width);margin:0 auto;padding:20px}
-
-/* Header */
 header.site-header{
   position:sticky;
   top:0;
-  z-index:50;
-  background:rgba(255,255,255,0.95);
-  backdrop-filter:blur(6px);
-  border-bottom:1px solid var(--glass);
+  z-index:60;
+  backdrop-filter:saturate(120%) blur(6px);
+  background:rgba(255,255,255,0.92);
+  border-bottom:1px solid var(--glass)
 }
-
-.header-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:10px 20px;
-}
-
-.logo{
-  font-weight:900;
-  font-size:1.25rem;
-  color:var(--accent);
-  text-decoration:none;
-}
-
-nav.nav{
-  display:flex;
-  gap:12px;
-}
-
-nav.nav a{
-  color:var(--muted);
-  text-decoration:none;
-  padding:8px 10px;
-  border-radius:8px;
-}
-
-nav.nav a:hover{
-  background:rgba(0,0,0,0.04);
-  color:var(--text);
-}
-
-/* Hero */
-.hero{
-  display:flex;
-  gap:20px;
-  align-items:center;
-  padding:28px;
-  border-radius:14px;
-  margin-top:14px;
-  background:linear-gradient(135deg,#f1f5ff,#ffffff);
-}
-
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px}
+.logo{font-weight:900;font-size:1.25rem;color:var(--red);display:flex;align-items:center;gap:10px;text-decoration:none}
+nav.nav{display:flex;gap:12px;align-items:center}
+nav.nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px}
+nav.nav a:hover{background:rgba(0,0,0,0.03);color:var(--text)}
+.hero{display:flex;gap:20px;align-items:center;padding:28px;border-radius:14px;margin-top:14px;background: radial-gradient(circle at 10% 10%, rgba(255,245,240,0.6), transparent 8%), linear-gradient(180deg, rgba(255,255,255,0.6), transparent 10%);}
 .hero-left{flex:1}
-
-.hero h1{
-  margin:0;
-  font-size:2rem;
-}
-
-.lead{
-  color:var(--muted);
-  margin-top:8px;
-}
-
-.hero-right{
-  width:320px;
-}
-
-.banner{
-  width:100%;
-  height:220px;
-  border-radius:12px;
-  background:#eef2ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--muted);
-  box-shadow:0 10px 30px rgba(0,0,0,0.06);
-}
-
-/* Sections */
+.hero h1{margin:0;font-size:2rem}
+.lead{color:var(--muted);margin-top:8px}
+.hero-right{width:320px}
+.banner{width:100%;border-radius:12px;height:220px;object-fit:cover;background:#ffecec;display:flex;align-items:center;justify-content:center;font-size:1.05rem;color:var(--muted);box-shadow:0 10px 30px rgba(0,0,0,0.06)}
 section{padding:20px 0}
-
 h2{margin:0 0 8px 0}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:var(--gap);
-}
-
-.card{
-  background:var(--panel);
-  border-radius:12px;
-  padding:10px;
-  box-shadow:0 6px 20px rgba(20,20,20,0.06);
-}
-
-.card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-.meta{
-  margin-top:8px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.price{
-  font-weight:700;
-  color:var(--accent-2);
-}
-
-/* Footer */
-footer.site-footer{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  background:rgba(255,255,255,0.95);
-  border-top:1px solid var(--glass);
-  text-align:center;
-  padding:16px;
-  color:var(--muted);
-}
-
-/* Lightbox */
-.lightbox{
-  position:fixed;
-  inset:0;
-  display:none;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,0.65);
-  z-index:999;
-  color:#fff;
-  text-align:center;
-}
-
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:var(--gap)}
+.card{background:var(--panel);border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(20,20,20,0.05);padding:10px;position:relative}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:8px;display:block}
+.card .meta{margin-top:8px;display:flex;justify-content:space-between;align-items:center}
+.price{font-weight:700;color:var(--green)}
+.about{background:linear-gradient(90deg,#fff,#fff);border-radius:12px;padding:16px;border:1px solid var(--glass)}
+footer.site-footer{padding:18px 20px;border-top:1px solid var(--glass);text-align:center;color:var(--muted);position:fixed;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.95));}
+.decor { position:fixed;inset:0;pointer-events:none;z-index:10; background-image: radial-gradient(circle at 10% 10%, rgba(255,240,240,0.6), transparent 4%), radial-gradient(circle at 90% 30%, rgba(230,255,240,0.6), transparent 4%); }
+.dec-emoji{position:fixed;font-size:28px;opacity:0.95}
+.dec-1{left:6%;top:6%}
+.dec-2{left:86%;top:8%}
+.dec-3{left:10%;bottom:10%}
+.dec-4{right:6%;bottom:8%}
+.lights{position:fixed;left:0;right:0;top:0;height:60px;pointer-events:none;z-index:9}
+.lights .bulb{position:absolute;top:18px;font-size:18px;transform:translateX(-50%);opacity:0.95;filter:drop-shadow(0 2px 2px rgba(0,0,0,0.15));}
+.lights .b1{left:8%}
+.lights .b2{left:18%}
+.lights .b3{left:28%}
+.lights .b4{left:38%}
+.lights .b5{left:48%}
+.lights .b6{left:58%}
+.lights .b7{left:68%}
+.lights .b8{left:78%}
+.lights .b9{left:88%}
+.lights .bulb{animation:blink 2s infinite}
+@keyframes blink { 0%{opacity:1}50%{opacity:0.25}100%{opacity:1} }
+.snow {pointer-events:none;position:fixed;inset:0;z-index:8}
+.snow i{position:absolute;top:-10%;font-size:14px;color:#fff;opacity:0.95;animation:fall linear infinite}
+@keyframes fall { to { transform: translateY(120vh) rotate(200deg); } }
+.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:30px;background:rgba(0,0,0,0.6);z-index:999}
 .lightbox.show{display:flex}
-
-.lightbox img{
-  max-width:86vw;
-  max-height:70vh;
-  border-radius:12px;
-  margin-bottom:12px;
-}
-
-.lb-close{
-  position:absolute;
-  top:20px;
-  right:26px;
-  font-size:36px;
-  background:none;
-  border:none;
-  color:#fff;
-  cursor:pointer;
-}
-
+.lb-close{position:absolute;right:22px;top:18px;font-size:36px;background:transparent;border:none;color:#fff;cursor:pointer}
+.lightbox img{max-width:86vw;max-height:80vh;border-radius:10px}
+.audio-toggle{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--glass);padding:6px 10px;border-radius:10px;background:rgba(255,255,255,0.9);cursor:pointer}
 @media (max-width:880px){
-  .hero{flex-direction:column}
+  .hero{flex-direction:column;padding:16px}
   .hero-right{width:100%}
   .card img{height:140px}
+  .logo{font-size:1.05rem}
 }
 </style>
 </head>
-
 <body>
+<div class="decor" aria-hidden="true">
+  <div class="dec-emoji dec-1">🎅</div>
+  <div class="dec-emoji dec-2">🧝‍♀️</div>
+  <div class="dec-emoji dec-3">🎁</div>
+  <div class="dec-emoji dec-4">❄️</div>
+</div>
+<div class="lights" aria-hidden="true">
+  <div class="bulb b1">🔴</div>
+  <div class="bulb b2">🟢</div>
+  <div class="bulb b3">🟡</div>
+  <div class="bulb b4">🔴</div>
+  <div class="bulb b5">🟢</div>
+  <div class="bulb b6">🟡</div>
+  <div class="bulb b7">🔴</div>
+  <div class="bulb b8">🟢</div>
+  <div class="bulb b9">🟡</div>
+</div>
+<div class="snow" aria-hidden="true"></div>
 
 <header class="site-header">
-  <div class="header-inner container">
-    <a class="logo" href="#">Hudson’s Art</a>
-    <nav class="nav">
-      <a href="#home">Home</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<div class="header-inner container">
+  <a class="logo" href="#">🎄 Hudson's Art</a>
+  <nav class="nav" aria-label="Main navigation">
+    <a href="#home">Home</a>
+    <a href="#gallery">My Art</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div style="display:flex;gap:8px;align-items:center">
+    <div id="audioControl" class="audio-toggle" role="button" aria-pressed="false" title="Play / pause jingle">🔔 <span id="audioLabel">Play jingle</span></div>
   </div>
+</div>
 </header>
 
 <main>
-
 <section id="home" class="hero container">
-  <div class="hero-left">
-    <h1>Hudson’s Art Gallery</h1>
-    <p class="lead">Buy my full art collection in one simple purchase.</p>
-  </div>
-  <div class="hero-right">
-    <div class="banner">All artwork • $5</div>
-  </div>
+<div class="hero-left">
+  <h1>Hudson's Christmas Art Gallery 🎅</h1>
+  <p class="lead">Welcome to my holiday art shop! Browse my drawings below — new holiday pieces added regularly.</p>
+</div>
+<div class="hero-right">
+  <div class="banner" id="featured-art">Featured: Holiday sketch 🎁</div>
+</div>
 </section>
 
 <section id="gallery" class="container">
-  <h2>Full Art Collection</h2>
-
-  <!-- BUY ALL BUTTON -->
-  <div style="text-align:center;margin:20px 0;">
-    <h3>Get every artwork</h3>
-    <p style="color:var(--muted)">One purchase • Instant download</p>
-
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-      <input type="hidden" name="cmd" value="_s-xclick">
-      <input type="hidden" name="hosted_button_id" value="KUW32DNM7Q3Y2">
-      <input type="submit" value="Buy All Artwork – $5"
-             style="padding:14px 28px;
-                    font-size:1.1rem;
-                    border:none;
-                    border-radius:8px;
-                    background:#FFD140;
-                    font-weight:bold;
-                    cursor:pointer;">
-    </form>
-
-    <a href="downloads/Hudsons_Art_Collection.zip" target="_blank"
-       style="display:block;margin-top:8px;
-              color:var(--accent-2);
-              font-weight:bold;
-              text-decoration:none;">
-      Download full collection after payment
-    </a>
-  </div>
-
-  <div id="gallery-grid" class="grid"></div>
+<h2>My Art</h2>
+<div id="gallery-grid" class="grid" aria-live="polite"></div>
 </section>
 
 <section id="about" class="container">
-  <h2>About</h2>
-  <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
-    <img src="assets/gallery/IMG_6869.jpeg" alt="Hudson"
-         style="width:150px;height:150px;border-radius:50%;object-fit:cover;
-                box-shadow:0 8px 18px rgba(0,0,0,0.12);">
-    <p style="max-width:500px;">
-      <strong>Hi! I’m Hudson.</strong> I’m a young artist who loves drawing and sharing my work.
-      Thanks for supporting my art!
-    </p>
-  </div>
+<h2>About</h2>
+<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+<img src="assets/gallery/IMG_6869.jpeg" alt="Photo of Hudson" style="width:150px;height:150px;border-radius:50%;object-fit:cover;box-shadow:0 8px 18px rgba(0,0,0,0.12);display:block;">
+<div style="flex:1;min-width:200px;">
+<p><strong>Hi! I’m Hudson.</strong> I’m a young artist who loves drawing and sharing my creations. My art is inspired by the holidays and imagination — I made the pieces on this site especially for Christmas. Thanks for stopping by!</p>
+</div>
+</div>
 </section>
 
 <section id="contact" class="container">
-  <h2>Contact</h2>
-  <p>Questions? Reach out anytime.</p>
+<h2>Contact</h2>
+<p>If you'd like to ask about a piece, click a PayPal "Buy Now" button — they'll open in a new tab, then you can download your artwork using the link below each button.</p>
 </section>
-
 </main>
 
 <footer class="site-footer">
-  © <span id="year"></span> Hudson’s Art
+<div class="container">
+<small>© <span id="year"></span> Hudson's Art — Holiday Collection</small>
+</div>
 </footer>
 
-<div id="lightbox" class="lightbox">
-  <button class="lb-close" id="lb-close">×</button>
-  <img id="lb-img" alt="Artwork preview">
-  <div id="lb-title"></div>
+<div id="lightbox" class="lightbox" aria-hidden="true">
+<button id="lb-close" class="lb-close">×</button>
+<img id="lb-img" alt="Enlarged art">
 </div>
 
+<audio id="jingle" loop>
+<source src="assets/music/jingle.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-const artworks = [
-  { src:'assets/gallery/Ron Weasley_1.jpeg', title:'Ron Weasley' },
-  { src:'assets/gallery/Skateboarder_1.jpeg', title:'Skateboarder' },
-  { src:'assets/gallery/CamScanner 10-20-25 14.38_2.jpeg', title:'Koala' },
-  { src:'assets/gallery/CamScanner 1-12-26 13.02_1.jpeg', title:'Harry Potter' }
+const defaultGalleryFiles = [
+  {
+    src: 'assets/gallery/Koala_with_Santa_hat_1.jpeg',
+    title: 'Christmas Koala',
+    price: 2,
+    download: 'downloads/Koala_with_Santa_hat.pdf',
+    paypalButtonId: 'JH6L5PRHF7V4G'
+  },
+  {
+    src: 'assets/gallery/Christmas_Harry_Potter_1.jpeg',
+    title: 'Christmas Harry Potter',
+    price: 2,
+    download: 'downloads/Christmas_Harry_Potter.pdf',
+    paypalButtonId: 'Q3VXS3ZXW9772'
+  },
+  {
+    src: 'assets/gallery/The_Grinch_1.jpeg',
+    title: 'The Grinch',
+    price: 2,
+    download: 'downloads/The_Grinch.pdf',
+    paypalButtonId: 'Q5FPPXAWNSWR8'
+  },
 ];
 
-const grid = document.getElementById('gallery-grid');
+const galleryGrid = document.getElementById('gallery-grid');
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-img');
-const lbTitle = document.getElementById('lb-title');
+const lbClose = document.getElementById('lb-close');
+const audio = document.getElementById('jingle');
+const audioControl = document.getElementById('audioControl');
+const audioLabel = document.getElementById('audioLabel');
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* Render artwork grid */
-artworks.forEach(art=>{
-  const card=document.createElement('div');
-  card.className='card';
+function openLightbox(src){lbImg.src=src; lb.classList.add('show'); lb.setAttribute('aria-hidden','false')}
+function closeLightbox(){lb.classList.remove('show'); lb.setAttribute('aria-hidden','true')}
+lbClose.addEventListener('click', closeLightbox);
+lb.addEventListener('click', e=>{if(e.target===lb) closeLightbox()});
+document.addEventListener('keydown', e=>{if(e.key==='Escape') closeLightbox()});
 
-  const img=document.createElement('img');
-  img.src=art.src;
-  img.alt=art.title;
-  img.onclick=()=>{
-    lbImg.src=art.src;
-    lbTitle.textContent=art.title;
-    lb.classList.add('show');
-  };
+function renderGrid(container, artworks){
+  container.innerHTML = '';
+  artworks.forEach((art,i)=>{
+    const card = document.createElement('div');
+    card.className = 'card';
 
-  card.appendChild(img);
-  card.innerHTML+=`
-    <div class="meta">
-      <span>${art.title}</span>
-      <span class="price">$5</span>
-    </div>
-  `;
+    const img = document.createElement('img');
+    img.src = art.src;
+    img.alt = art.title;
+    img.loading = 'lazy';
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => openLightbox(art.src));
 
-  grid.appendChild(card);
+    const meta = document.createElement('div');
+    meta.className = 'meta';
+    meta.innerHTML = `<div style="color:var(--muted);font-size:0.95rem">${art.title}</div>
+                      <div class="price">$${art.price}</div>`;
+
+    const paypalDiv = document.createElement('div');
+    paypalDiv.style.marginTop = '8px';
+    paypalDiv.innerHTML = `
+      <form action="https://www.paypal.com/ncp/payment/${art.paypalButtonId}" method="post" target="_blank" style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <input type="submit" value="Buy Now" style="padding:8px 16px;border:none;border-radius:6px;background:#FFD140;font-weight:bold;cursor:pointer;">
+      </form>
+      <a href="${art.download}" target="_blank" style="margin-top:6px;display:inline-block;color:var(--green);font-weight:bold;text-decoration:none;">Download after payment</a>
+    `;
+
+    card.appendChild(img);
+    card.appendChild(meta);
+    card.appendChild(paypalDiv);
+    container.appendChild(card);
+  });
+}
+
+renderGrid(galleryGrid, defaultGalleryFiles);
+
+audioControl.addEventListener('click',()=>{
+  if(audio.paused){audio.play(); audioControl.setAttribute('aria-pressed','true'); audioLabel.textContent='Pause jingle'}
+  else{audio.pause(); audioControl.setAttribute('aria-pressed','false'); audioLabel.textContent='Play jingle'}
 });
 
-/* Lightbox */
-document.getElementById('lb-close').onclick=()=>lb.classList.remove('show');
-lb.onclick=e=>{if(e.target===lb)lb.classList.remove('show')};
+// Snow generation
+const snowEl = document.querySelector('.snow');
+const snowCount = 40;
+for(let i=0;i<snowCount;i++){
+  const s = document.createElement('i');
+  s.textContent = '❄️';
+  s.style.left = `${Math.random()*100}%`;
+  s.style.fontSize = `${10+Math.random()*12}px`;
+  s.style.animationDuration = `${5+Math.random()*5}s`;
+  snowEl.appendChild(s)
+}
 </script>
-
 </body>
 </html>
